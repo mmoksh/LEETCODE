@@ -1,8 +1,9 @@
 class Solution {
     public int numSubarrayProductLessThanK(int[] nums, int k) {
-        long mult = 1;
-        long count = 0;
+        int mult = 1;
+        int count = 0;
         int low = 0;
+        int duplicate, new_subs;
         for (int i = 0; i < nums.length; i++) {
             mult *= nums[i];
             while (mult >= k && low < nums.length) {
@@ -12,11 +13,11 @@ class Solution {
                 continue;
             }
             int x = i - low;
-            long duplicate = (x % 1 == 0)? x / 2 * (x + 1): (x + 1) / 2 * x;
-            long new_subs = (x % 1 == 1)? (x + 1) / 2 * (x + 2): (x + 2) / 2 * (x + 1);
+            duplicate = (x % 1 == 0)? x / 2 * (x + 1): (x + 1) / 2 * x;
+            new_subs = (x % 1 == 1)? (x + 1) / 2 * (x + 2): (x + 2) / 2 * (x + 1);
             count -= duplicate;
             count += new_subs;
         }
-        return (int)count;
+        return count;
     }
 }
