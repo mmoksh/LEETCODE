@@ -7,10 +7,10 @@ class Solution {
         int height, maxHeight;
         int globalHeight = 0;
         
-        for (int j = 0; j < positions.length; j++) {
+        for (int[] position : positions) {
             maxHeight = 0;
-            l = positions[j][0];
-            r = positions[j][0] + positions[j][1];
+            l = position[0];
+            r = position[0] + position[1];
             for (int i = 0; i < regions.size(); i++) {
                 s = regions.get(i)[0];
                 e = regions.get(i)[1];
@@ -18,20 +18,9 @@ class Solution {
 
                 if (r <= s || l >= e) {
                     continue;
-                } else if (l <= s && r < e) {
-                    regions.get(i)[0] = r;
-                    maxHeight = Math.max(maxHeight, height);
-                } else if (l > s && r >= e) {
-                    regions.get(i)[1] = l;
-                    maxHeight = Math.max(maxHeight, height);
-                } else if (l <= s && r >= e) {
-                    maxHeight = Math.max(maxHeight, height);
-                    regions.remove(i--);
-                } else {
-                    maxHeight = Math.max(maxHeight, height);
-                    regions.add(new int[]{r, e, height});
-                    regions.get(i)[1] = l;
                 }
+                maxHeight = Math.max(maxHeight, height);
+                
             }
             regions.add(new int[]{l, r, maxHeight + r - l});
             globalHeight = Math.max(globalHeight, maxHeight + r - l);
