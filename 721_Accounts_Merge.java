@@ -19,7 +19,7 @@ class Solution {
                             hashSet.addAll(emails.get(j));
                             emails.remove(j);
                             names.remove(j);
-                            j--;
+                            break;
                         }
                     }
                 } else {
