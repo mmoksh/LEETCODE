@@ -6,10 +6,7 @@ class Solution {
         }
         int winsX = wins(board, 'X');
         int winsO = wins(board, 'O');
-        if (winsX > 0 && winsO > 0) {
-            return false;
-        }
-        if (winsX > 1 || winsO > 1) {
+        if (winsX + winsO > 1) {
             return false;
         }
         if (winsX == 1 && count != 1) {
