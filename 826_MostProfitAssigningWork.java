@@ -4,15 +4,9 @@ class Solution {
         for (int i = 0; i < difficulty.length; i++) {
             if (treeMap.floorEntry(difficulty[i]) == null || treeMap.floorEntry(difficulty[i]).getValue() < profit[i]) {
                 treeMap.put(difficulty[i], profit[i]);
-            }
-        }
-        
-        int max = treeMap.firstEntry().getValue();
-        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
-            if (entry.getValue() < max) {
-                treeMap.put(entry.getKey(), max);
-            } else {
-                max = entry.getValue();
+                while (treeMap.ceilingEntry(difficulty[i] + 1) != null && treeMap.ceilingEntry(difficulty[i] + 1).getValue() < profit[i]) {
+                    treeMap.remove(treeMap.ceilingKey(difficulty[i] + 1));
+                }
             }
         }
         
