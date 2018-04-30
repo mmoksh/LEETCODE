@@ -1,23 +1,18 @@
 class Solution {
     public static int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
-        int[][] jobs = new int[difficulty.length][2];
-        for (int i = 0; i < jobs.length; i++) {
-            jobs[i][0] = difficulty[i];
-            jobs[i][1] = profit[i];
-        }
-
-        Arrays.sort(jobs, (int[] arr1, int[] arr2) -> arr1[0] - arr2[0]);
-        int max = jobs[0][1];
-        for (int i = 1; i < jobs.length; i++) {
-            if (jobs[i][1] < max) {
-                jobs[i][1] = max;
-            } else {
-                max = jobs[i][1];
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+        for (int i = 0; i < difficulty.length; i++) {
+            if (!treeMap.containsKey(difficulty[i]) || treeMap.get(difficulty[i]) < profit[i]) {
+                treeMap.put(difficulty[i], profit[i]);
             }
         }
-        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-        for (int[] job : jobs) {
-            treeMap.put(job[0], job[1]);
+        int max = treeMap.firstEntry().getValue();
+        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
+            if (entry.getValue() < max) {
+                treeMap.put(entry.getKey(), max);
+            } else {
+                max = entry.getValue();
+            }
         }
         int totalProfit = 0;
         for (int w : worker) {
