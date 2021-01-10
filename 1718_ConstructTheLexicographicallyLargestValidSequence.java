@@ -21,8 +21,7 @@ class Solution {
                 visited[i] = true;
                 output[index] = i;
                 output[index + i] = i;
-                boolean done = dfs(index + 1, output, visited);
-                if (done) return true;
+                if (dfs(index + 1, output, visited)) return true;
                 visited[i] = false;
                 output[index] = 0;
                 output[index + i] = 0;
