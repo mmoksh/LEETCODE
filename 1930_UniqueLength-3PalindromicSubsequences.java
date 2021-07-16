@@ -16,7 +16,7 @@ class Solution {
                 for (int j = 0; j < 26; j++) {
                     if (!palindrom[charIndex][j] && lastIndex[j] > firstIndex[charIndex]) {
                         palindrom[charIndex][j] = true;
-                      output++;
+                        output++;
                     }
                 }
             }
